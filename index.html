@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز عبود لرفع ومشاركة الملفات العملاقة</title>
+    <meta name="description" content="منصة سريعة وآمنة لرفع ومشاركة الملفات بأعلى سرعة وبدون قيود.">
+    <meta name="theme-color" content="#0a0f1c">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- شريط التقدم العلوي -->
+    <div id="scrollProgress"></div>
+
+    <!-- شاشة التحميل الترحيبية -->
+    <div id="splash">
+        <div class="splash-content">
+            <div class="logo-circle">⚡</div>
+            <h1>Abood Transfer</h1>
+            <p>جاري تحضير منصة الرفع السريعة...</p>
+            <div class="loading-bar">
+                <div class="loading-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- الخلفية المتحركة -->
+    <div class="background">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- زر العودة للأعلى -->
+    <button id="topBtn">⬆</button>
+
+    <!-- الهيدر وشريط التنقل -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">🚀 Abood Transfer</div>
+            <div class="nav-links">
+                <a href="#upload-section">الرفع</a>
+                <a href="#stats-section">الإحصائيات</a>
+                <a href="#developer">المطور</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- واجهة الواجهة الرئيسية (Hero Section) -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>شارك ملفاتك بلا حدود وبأعلى سرعة 🚀</h1>
+            <p>ارفع ملفاتك الكبيرة وسنولد لك رابط مباشر سريع للتحميل مع إحصائيات دقيقة وتفاصيل التاريخ بالكامل.</p>
+        </div>
+    </section>
+
+    <!-- الإحصائيات الحقيقية -->
+    <section id="stats-section" class="stats">
+        <div class="stat-box">
+            <h2 id="visitCounter">0</h2>
+            <p>إجمالي زيارات الموقع</p>
+        </div>
+        <div class="stat-box">
+            <h2 id="totalUploads">0</h2>
+            <p>الملفات المرفوعة</p>
+        </div>
+        <div class="stat-box">
+            <h2 id="downloadCounter">0</h2>
+            <p>إجمالي التنزيلات</p>
+        </div>
+    </section>
+
+    <!-- قسم رفع الملفات -->
+    <section id="upload-section" class="upload-container">
+        <div class="upload-card">
+            <h2>📤 منطقة رفع الملفات السريعة</h2>
+            <p class="upload-subtitle">اسحب الملف وأسقطه هنا أو اضغط للاختيار من جهازك</p>
+            
+            <div class="drop-zone" id="dropZone">
+                <div class="drop-icon">📁</div>
+                <p>اختر أي ملف (يدعم جميع الأحجام)</p>
+                <input type="file" id="fileInput" hidden>
+                <button class="btn-primary" onclick="document.getElementById('fileInput').click()">اختر الملف</button>
+            </div>
+
+            <!-- شريط التقدم أثناء الرفع -->
+            <div id="uploadProgressContainer" class="progress-container" style="display: none;">
+                <div class="progress-info">
+                    <span id="fileName">File_Name.ext</span>
+                    <span id="uploadPercentage">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div id="uploadProgressBar" class="progress-bar-fill"></div>
+                </div>
+                <p id="uploadSpeed">جاري معالجة الملف...</p>
+            </div>
+
+            <!-- نتيجة الرفع ورابط التحميل -->
+            <div id="resultContainer" class="result-box" style="display: none;">
+                <h3>🎉 تم تجهيز رابط التحميل بنجاح!</h3>
+                <input type="text" id="generatedLink" readonly>
+                <div class="result-actions">
+                    <button id="copyBtn" class="btn-primary">📋 نسخ الرابط</button>
+                    <button id="openLinkBtn" class="btn-secondary">🔗 فتح الصفحة</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم العرض الخاص بالتحميل (يظهر عند فتح رابط ملف) -->
+    <section id="downloadView" class="download-view" style="display: none;">
+        <div class="download-card">
+            <div class="file-icon">📥</div>
+            <h2 id="dlFileName">اسم الملف.ext</h2>
+            <p class="file-size-badge" id="dlFileSize">الحجم: 0 ميغابايت</p>
+
+            <div class="file-details">
+                <div class="detail-item"><strong>🗓️ يوم الرفع:</strong> <span id="dlDay">الاربعاء</span></div>
+                <div class="detail-item"><strong>📅 التاريخ:</strong> <span id="dlDate">2026/07/22</span></div>
+                <div class="detail-item"><strong>⏰ الوقت:</strong> <span id="dlTime">11:24 PM</span></div>
+                <div class="detail-item"><strong>📊 عدد التحميلات:</strong> <span id="dlCount">0</span></div>
+            </div>
+
+            <button id="mainDownloadBtn" class="download-btn premium-btn">⚡ تحميل الملف الآن</button>
+        </div>
+    </section>
+
+    <!-- مميزات المنصة -->
+    <section class="features">
+        <h2 class="section-title">✨ مميزات السيرفر</h2>
+        <div class="features-grid">
+            <div class="feature-box">⚡<h3>سرعة نفاثة</h3><p>رفع وتحميل مباشر بأقصى سرعة اتصال متوفرة.</p></div>
+            <div class="feature-box">🔒<h3>آمن تماماً</h3><p>معالجة سريعة للملفات بدون أخطاء أو قيود تعسفية.</p></div>
+            <div class="feature-box">📊<h3>عدادات حقيقية</h3><p>تتبع دقيق لعدد الزيارات والتحميلات لكل ملف وللموقع.</p></div>
+            <div class="feature-box">🎨<h3>تصميم مظلم عصري</h3><p>تأثيرات بصرية نيون وأنيميشن سلس جداً مريح للعين.</p></div>
+        </div>
+    </section>
+
+    <!-- كرت المطور -->
+    <section id="developer" class="developer-section">
+        <h2 class="section-title">👨‍💻 المطور</h2>
+        <div class="developer-card">
+            <div class="developer-avatar">🚀</div>
+            <h3>عبدالله</h3>
+            <p>مطور تطبيقات أندرويد ومصمم مشاريع ويب تقنية حديثة.</p>
+            <div class="developer-links">
+                <div>🎮 Roblox: SAD_J82</div>
+                <div>📱 TikTok: dark4abod</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <h2>Abood Transfer</h2>
+        <p>جميع الحقوق محفوظة © <span id="year"></span></p>
+        <p>تم تطوير وتصميم الموقع بواسطة عبدالله</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
